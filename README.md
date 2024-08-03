@@ -46,7 +46,9 @@ The simplest way for anti-malware solutions to detect process hollowing is often
 ## Summary of 3 Developed Methods
 
 1. **Method 1:** This method is a general technique for process hollowing and supports all data directories. The presence of the relocation directory is mandatory. In this method, the host image base is modified and the host process context is updated using NtSetContextThread. These two modifications can make the process more detectable by anti-malware software, increasing the likelihood of detection ([ProcessHollowing - Method 1](https://github.com/mm-rezaei/ProcessHollowing1)).
+
 2. **Method 2:** This method differs from Method 1 in that it makes the process more elegant by not using two Windows APIs, at least one of which is crucial for making it undetectable. These two Windows APIs are NtReadVirtualMemory and NtSetContextThread. Additionally, this method supports all data directories, with the relocation directory being mandatory. While the host image base is modified in this method, the host process context is not updated using NtSetContextThread. This approach can make the process less detectable by anti-malware software ([ProcessHollowing - Method 2](https://github.com/mm-rezaei/ProcessHollowing2)).
+
 3. **Method 3:** This method differs from the two previous methods in that it incorporates significant changes, making the process more specialized and providing advantages that make it harder to detect. Like Method 2, this approach does not use NtSetContextThread to update the host process context. It performs process hollowing without altering the host process's details, such as its image, context, entry point address, and instructions at the entry point. These modifications enhance the method's effectiveness. This method supports all data directories, but currently, I have only developed support for the following: Import Table, Relocation, TLS, and Import Address Table. Note that the Relocation data directory is mandatory. If the PE file you wish to inject contains data directories that are not supported, the method may not work as intended. If you need to support additional data directories, you can extend the development to include them. ([ProcessHollowing - Method 3](https://github.com/mm-rezaei/ProcessHollowing3)).
 
 ## Current Method Specification
@@ -54,17 +56,17 @@ The simplest way for anti-malware solutions to detect process hollowing is often
 1. This tool only supports x86 (32-bit) PE types
 2. Windows APIs used in general method of Process Hollowing (+ Determine which ones are being used in the current method):
 
-	Used:
-		a. CreateProcessW
-		b. NtGetContextThread
-		c. NtReadVirtualMemory
-		d. NtResumeThread
-		e. NtSetContextThread
-		f. NtWriteVirtualMemory
-		g. VirtualAllocEx
+	2.1. Used:
+		2.1.1. CreateProcessW
+		2.1.2. NtGetContextThread
+		2.1.3. NtReadVirtualMemory
+		2.1.4. NtResumeThread
+		2.1.5. NtSetContextThread
+		2.1.6. NtWriteVirtualMemory
+		2.1.7. VirtualAllocEx
 
-	Not Used:
-		a. VirtualProtectEx
+	2.2. Not Used:
+		2.2.1. VirtualProtectEx
 
 3. Provide support for all data directories
 4. The existence of the relocation directory is mandatory
