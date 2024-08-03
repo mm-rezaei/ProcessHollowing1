@@ -75,7 +75,6 @@ The simplest way for anti-malware solutions to detect process hollowing is often
 7. Perform process hollowing with altering the host process's details, including its context and entry point address
 
 ## Usage Guide
-
 		
 You need to provide two parameters in the following format:
 
