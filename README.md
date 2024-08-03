@@ -56,17 +56,17 @@ The simplest way for anti-malware solutions to detect process hollowing is often
 1. This tool only supports x86 (32-bit) PE types
 2. Windows APIs used in general method of Process Hollowing (+ Determine which ones are being used in the current method):
 
-	2.1. Used:
-		2.1.1. CreateProcessW
-		2.1.2. NtGetContextThread
-		2.1.3. NtReadVirtualMemory
-		2.1.4. NtResumeThread
-		2.1.5. NtSetContextThread
-		2.1.6. NtWriteVirtualMemory
-		2.1.7. VirtualAllocEx
+   2.1. **List of Used Windows APIs in this Method:**
+   - `CreateProcessW`
+   - `NtGetContextThread`
+   - `NtReadVirtualMemory`
+   - `NtResumeThread`
+   - `NtSetContextThread`
+   - `NtWriteVirtualMemory`
+   - `VirtualAllocEx`
 
-	2.2. Not Used:
-		2.2.1. VirtualProtectEx
+   2.2. **List of Windows APIs Not Utilized in this Method:**
+   - `VirtualProtectEx`
 
 3. Provide support for all data directories
 4. The existence of the relocation directory is mandatory
